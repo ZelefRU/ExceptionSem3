@@ -1,14 +1,21 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 
-public class Main {
-    public static void main(String[] args) {
+public class Task1 {
+    public static void main(String[] args) throws IOException {
+
+        rwLineFixed(Path.of("pom.xml"), Path.of("test.txt"));
+    }
 
 
+    private static void rwLineFixed(Path pathRead, Path pathWrite) throws IOException {
+
+        try (BufferedReader in = new BufferedReader(new FileReader(pathRead.toFile()));
+             BufferedWriter out = new BufferedWriter(new FileWriter(pathWrite.toFile()))) {
+            out.write(in.readLine());
+        }
     }
 
     private void rwLine (Path pathRead, Path pathWrite) throws IOException {
@@ -34,17 +41,6 @@ public class Main {
             } catch (IOException e){
 
             }
-        }
-    }
-
-
-    private void rwLineFixed (Path pathRead, Path pathWrite) throws IOException {
-
-        try (BufferedReader in = new BufferedReader(null);
-             BufferedWriter out = new BufferedWriter(null)) {
-            out.write(in.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
